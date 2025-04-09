@@ -5,11 +5,13 @@ import Datastructures.SinglyLinkedList;
 import Shooter.Coordinate;
 import Shooter.Schot;
 import Shooter.Shooter;
+import SortingAlgorithms.MergeSort;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Comparator;
 
 public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
 {
@@ -41,7 +43,6 @@ public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
                     double shotResult = shotObject.getDouble("schotresultaat");
 
                     JSONObject coordinateObject = shotObject.getJSONObject("coordinaten");
-
                     Coordinate coordinates = new Coordinate(coordinateObject.getDouble("X"), coordinateObject.getDouble("Y"));
 
                     String comparisonPreviousShot = shotObject.getString("vergelijking_vorig_schot");
@@ -49,7 +50,6 @@ public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
                     double totalScore = shotObject.getDouble("totale_score");
 
                     Schot schot = new Schot(shotNumber, shotResult, coordinates, comparisonPreviousShot, currentSerieAvarage, totalScore);
-
                     shots.add(schot);
                 }
 
@@ -57,16 +57,12 @@ public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
                 array.add(shooter);
             }
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 
-        return array;
-    }
-
-    public static void main(String[] args) {
-        JsonLoader jsonLoader = new JsonLoader();
-
-        System.out.println(jsonLoader.loadData("C:/Users/timde/OneDrive/Documenten/GitHub/Algorithm-Programming/exampledataset/schutters.json").get(3).schoten.get(2).schotresultaat);
+        // Sorteer de array voor je hem teruggeeft
+        return MergeSort.mergeSort(array, Comparator.comparingInt(s -> s.schutter_ID));
     }
 }
