@@ -76,14 +76,17 @@ public class ShooterDetailScreen extends JFrame
         setVisible(true);
     }
 
-    private void populateTable(List<ShooterShot> shots) {
+    private void populateTable(List<ShooterShot> shots)
+    {
         tableModel.setRowCount(0);
-        for (ShooterShot shot : shots) {
+        for (ShooterShot shot : shots)
+        {
             tableModel.addRow(new Object[]{shot.getShootingResult(), shot.getComparingShot(), shot.getAverageShot(), shot.getTotalScore()});
         }
     }
 
-    private void sortTable() {
+    private void sortTable()
+    {
         String selectedSort = (String) sortOptions.getSelectedItem();
         String selectedAlgorithm = (String) algorithmOptions.getSelectedItem();
 

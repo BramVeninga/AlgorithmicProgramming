@@ -111,4 +111,29 @@ public class MyArrayList<T>
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        MyArrayList<?> other = (MyArrayList<?>) obj;
+
+        if (this.size != other.size) return false;
+
+        for (int i = 0; i < size; i++)
+        {
+            T thisElement = this.data[i];
+            Object otherElement = other.data[i];
+
+            if (thisElement == null ? otherElement != null : !thisElement.equals(otherElement))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
