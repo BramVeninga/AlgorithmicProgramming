@@ -67,5 +67,26 @@ public class MyArrayList<T>
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
+
+    public void clear()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            data[i] = null;
+        }
+        size = 0;
+    }
+
+    public boolean contains(T element)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if ((data[i] == null && element == null) || (data[i] != null && data[i].equals(element)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

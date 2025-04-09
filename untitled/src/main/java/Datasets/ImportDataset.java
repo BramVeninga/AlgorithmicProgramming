@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ImportDataset {
-    public static void main(String[] args) {
+public class ImportDataset
+{
+    public static void main(String[] args)
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Kies het bestandsformaat (json/csv/txt):");
         String format = scanner.nextLine().trim().toLowerCase();
@@ -20,7 +22,8 @@ public class ImportDataset {
 
         List<JSONObject> dataset = loadData(filePath, format);
 
-        if (dataset == null) {
+        if (dataset == null)
+        {
             System.out.println("Kon dataset niet laden.");
             return;
         }
@@ -32,15 +35,20 @@ public class ImportDataset {
         String zoekWaarde = scanner.nextLine().trim();
 
         JSONObject resultaat = sequentialSearch(dataset, zoekKey, zoekWaarde);
-        if (resultaat != null) {
+        if (resultaat != null)
+        {
             System.out.println("Gevonden: " + resultaat.toString(2));
-        } else {
+        }
+        else
+        {
             System.out.println("Niet gevonden.");
         }
     }
 
-    public static List<JSONObject> loadData(String filePath, String format) {
-        switch (format) {
+    public static List<JSONObject> loadData(String filePath, String format)
+    {
+        switch (format)
+        {
             case "json":
                 return loadJSONData(filePath);
             case "csv":
@@ -75,9 +83,11 @@ public class ImportDataset {
         }
     }
 
-    public static List<JSONObject> loadCSVData(String filePath) {
+    public static List<JSONObject> loadCSVData(String filePath)
+    {
         List<JSONObject> list = new ArrayList<>();
-        try {
+        try
+        {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             if (lines.isEmpty()) return list;
 
@@ -87,42 +97,54 @@ public class ImportDataset {
                 String[] values = lines.get(i).split(",");
 
                 // Controleer of de rij evenveel kolommen heeft als de header
-                if (values.length != headers.length) {
+                if (values.length != headers.length)
+                {
                     System.out.println("Ongeldige CSV-regel op regel " + (i + 1) + ": " + lines.get(i));
                     continue; // Sla de rij over en ga naar de volgende
                 }
 
                 JSONObject obj = new JSONObject();
-                for (int j = 0; j < headers.length; j++) {
+                for (int j = 0; j < headers.length; j++)
+                {
                     obj.put(headers[j], values[j].trim()); // Verwijder onnodige spaties
                 }
                 list.add(obj);
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         return list;
     }
 
-    public static List<JSONObject> loadTXTData(String filePath) {
+    public static List<JSONObject> loadTXTData(String filePath)
+    {
         List<JSONObject> list = new ArrayList<>();
-        try {
+        try
+        {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
-            for (String line : lines) {
+            for (String line : lines)
+            {
                 JSONObject obj = new JSONObject();
                 obj.put("text", line);
                 list.add(obj);
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
         return list;
     }
 
-    public static JSONObject sequentialSearch(List<JSONObject> dataset, String key, String value) {
-        for (JSONObject obj : dataset) {
-            if (obj.has(key) && obj.get(key).toString().equals(value)) {
+    public static JSONObject sequentialSearch(List<JSONObject> dataset, String key, String value)
+    {
+        for (JSONObject obj : dataset)
+        {
+            if (obj.has(key) && obj.get(key).toString().equals(value))
+            {
                 return obj;
             }
         }

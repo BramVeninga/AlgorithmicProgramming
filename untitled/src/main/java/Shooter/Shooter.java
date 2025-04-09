@@ -1,15 +1,40 @@
 package Shooter;
 
-import java.util.ArrayList;
+import Datastructures.SinglyLinkedList;
 
 public class Shooter
 {
     public int schutter_ID;
-    public ArrayList<Schot> schoten;
+    public SinglyLinkedList<Schot> schoten;
 
-    public Shooter(int schutter_ID, ArrayList<Schot> schoten)
+    public Shooter(int schutter_ID, SinglyLinkedList<Schot> schoten)
     {
         this.schutter_ID = schutter_ID;
         this.schoten = schoten;
+    }
+
+    public int getSchutter_ID()
+    {
+        return schutter_ID;
+    }
+
+    public void setSchutter_ID(int schutter_ID)
+    {
+        this.schutter_ID = schutter_ID;
+    }
+
+    public SinglyLinkedList<Schot> getSchoten()
+    {
+        return schoten;
+    }
+
+    public void setSchoten(SinglyLinkedList<Schot> schoten)
+    {
+        this.schoten = schoten;
+    }
+
+    public int getTotalShots()
+    {
+        return schoten.size();
     }
 }

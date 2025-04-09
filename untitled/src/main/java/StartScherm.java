@@ -5,7 +5,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartScherm extends JFrame {
+public class StartScherm extends JFrame
+{
     private JComboBox<String> schutterSelectie;
     private JComboBox<Integer> aantalSchotenSelectie;
     private JComboBox<String> positieSelectie;
@@ -14,7 +15,8 @@ public class StartScherm extends JFrame {
     private JButton schietenButton;
     private File selectedFile;
 
-    public StartScherm() {
+    public StartScherm()
+    {
         setTitle("Start Schietsessie");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,10 +50,13 @@ public class StartScherm extends JFrame {
         add(schietenButton);
     }
 
-    private void checkNieuweSchutter() {
-        if ("Nieuwe schutter toevoegen...".equals(schutterSelectie.getSelectedItem())) {
+    private void checkNieuweSchutter()
+    {
+        if ("Nieuwe schutter toevoegen...".equals(schutterSelectie.getSelectedItem()))
+        {
             String nieuweNaam = JOptionPane.showInputDialog(this, "Voer naam van nieuwe schutter in:");
-            if (nieuweNaam != null && !nieuweNaam.trim().isEmpty()) {
+            if (nieuweNaam != null && !nieuweNaam.trim().isEmpty())
+            {
                 schuttersLijst.add(nieuweNaam);
                 schutterSelectie.insertItemAt(nieuweNaam, 0);
                 schutterSelectie.setSelectedIndex(0);
@@ -59,12 +64,14 @@ public class StartScherm extends JFrame {
         }
     }
 
-    private void bestandKiezen(ActionEvent e) {
+    private void bestandKiezen(ActionEvent e)
+    {
         JFileChooser fileChooser = new JFileChooser();
         int choice = fileChooser.showOpenDialog(this);
         if (choice == JFileChooser.APPROVE_OPTION) {
             selectedFile = fileChooser.getSelectedFile();
-            if (selectedFile != null) {
+            if (selectedFile != null)
+            {
                 JOptionPane.showMessageDialog(this, "Geselecteerd bestand: " + selectedFile.getName());
 
                 // Open the analysisScreen
@@ -84,7 +91,8 @@ public class StartScherm extends JFrame {
         }
     }
 
-    private void openSchietbaanGUI(ActionEvent e) {
+    private void openSchietbaanGUI(ActionEvent e)
+    {
         String schutter = (String) schutterSelectie.getSelectedItem();
         int aantalSchoten = (Integer) aantalSchotenSelectie.getSelectedItem();
         String positie = (String) positieSelectie.getSelectedItem();
@@ -92,7 +100,8 @@ public class StartScherm extends JFrame {
         dispose();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SwingUtilities.invokeLater(() -> new StartScherm().setVisible(true));
     }
 }

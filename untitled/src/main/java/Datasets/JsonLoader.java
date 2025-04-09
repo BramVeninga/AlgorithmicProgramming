@@ -1,6 +1,7 @@
 package Datasets;
 
-import Datastructures.MyArray;
+import Datastructures.MyArrayList;
+import Datastructures.SinglyLinkedList;
 import Shooter.Coordinate;
 import Shooter.Schot;
 import Shooter.Shooter;
@@ -9,17 +10,16 @@ import org.json.JSONObject;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
-public class JsonLoader implements DataLoader<MyArray<Shooter>>
+public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
 {
     public JsonLoader()
     {
     }
 
-    public MyArray<Shooter> loadData(String path)
+    public MyArrayList<Shooter> loadData(String path)
     {
-        MyArray<Shooter> array = new MyArray<>();
+        MyArrayList<Shooter> array = new MyArrayList<>();
 
         try
         {
@@ -31,7 +31,7 @@ public class JsonLoader implements DataLoader<MyArray<Shooter>>
                 JSONObject object = jsonArray.getJSONObject(i);
 
                 int shooterId = object.getInt("schutter_ID");
-                ArrayList<Schot> shots = new ArrayList<>();
+                SinglyLinkedList<Schot> shots = new SinglyLinkedList<>();
 
                 for (int j = 0; j < object.getJSONArray("schoten").length(); j++)
                 {
@@ -57,9 +57,7 @@ public class JsonLoader implements DataLoader<MyArray<Shooter>>
                 array.add(shooter);
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

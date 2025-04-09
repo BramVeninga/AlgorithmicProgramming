@@ -16,7 +16,7 @@ public class ShooterDetailScreen extends JFrame {
     private List<ShooterShot> shooterShots;
 
     public ShooterDetailScreen(String shooterId) {
-        setTitle("🔍 Shooter.Shooter Details - " + shooterId);
+        setTitle(" Shooter.Shooter Details - " + shooterId);
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
