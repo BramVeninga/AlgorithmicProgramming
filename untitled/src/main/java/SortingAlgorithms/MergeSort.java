@@ -1,30 +1,30 @@
 package SortingAlgorithms;
 
-import java.util.ArrayList;
+import Datastructures.MyArrayList;
 import java.util.Comparator;
 
 public class MergeSort
 {
-    public static <T> ArrayList<T> mergeSort(ArrayList<T> list, Comparator<? super T> comparator)
+    public static <T> MyArrayList<T> mergeSort(MyArrayList<T> list, Comparator<? super T> comparator)
     {
         if (list.size() <= 1)
         {
-            return new ArrayList<>(list);
+            return new MyArrayList<>(list);
         }
 
         int mid = list.size() / 2;
-        ArrayList<T> left = new ArrayList<>(list.subList(0, mid));
-        ArrayList<T> right = new ArrayList<>(list.subList(mid, list.size()));
+        MyArrayList<T> left = list.subList(0, mid);
+        MyArrayList<T> right = list.subList(mid, list.size());
 
-        ArrayList<T> sortedLeft = mergeSort(left, comparator);
-        ArrayList<T> sortedRight = mergeSort(right, comparator);
+        MyArrayList<T> sortedLeft = mergeSort(left, comparator);
+        MyArrayList<T> sortedRight = mergeSort(right, comparator);
 
         return merge(sortedLeft, sortedRight, comparator);
     }
 
-    private static <T> ArrayList<T> merge(ArrayList<T> left, ArrayList<T> right, Comparator<? super T> comparator)
+    private static <T> MyArrayList<T> merge(MyArrayList<T> left, MyArrayList<T> right, Comparator<? super T> comparator)
     {
-        ArrayList<T> result = new ArrayList<>();
+        MyArrayList<T> result = new MyArrayList<>();
         int i = 0, j = 0;
 
         while (i < left.size() && j < right.size())

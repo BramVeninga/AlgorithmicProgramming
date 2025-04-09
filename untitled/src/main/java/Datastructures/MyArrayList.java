@@ -9,8 +9,31 @@ public class MyArrayList<T>
     @SuppressWarnings("unchecked")
     public MyArrayList()
     {
-        // Java laat geen directe creatie toe van generieke arrays, dus via Object[] en cast
         data = (T[]) new Object[DEFAULT_CAPACITY];
+    }
+
+    public MyArrayList(MyArrayList<T> other)
+    {
+        this();
+        for (int i = 0; i < other.size(); i++)
+        {
+            this.add(other.get(i));
+        }
+    }
+
+    public MyArrayList<T> subList(int fromIndex, int toIndex)
+    {
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex)
+        {
+            throw new IndexOutOfBoundsException("fromIndex: " + fromIndex + ", toIndex: " + toIndex + ", size: " + size);
+        }
+
+        MyArrayList<T> subList = new MyArrayList<>();
+        for (int i = fromIndex; i < toIndex; i++)
+        {
+            subList.add(get(i));
+        }
+        return subList;
     }
 
     public void add(T element)
@@ -89,4 +112,3 @@ public class MyArrayList<T>
         return false;
     }
 }
-
