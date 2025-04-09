@@ -50,10 +50,12 @@ public class SinglyLinkedList<T>
         {
             newNode.next = head;
             head = newNode;
-        } else
+        }
+        else
         {
             Node<T> current = head;
-            for (int i = 0; i < index - 1; i++) {
+            for (int i = 0; i < index - 1; i++)
+            {
                 current = current.next;
             }
             newNode.next = current.next;
@@ -73,7 +75,8 @@ public class SinglyLinkedList<T>
         {
             removedNode = head;
             head = head.next;
-        } else
+        }
+        else
         {
             Node<T> current = head;
             for (int i = 0; i < index - 1; i++)
@@ -137,5 +140,19 @@ public class SinglyLinkedList<T>
     {
         return size == 0;
     }
+
+    // Converteert de linked list naar een MyArray
+    public MyArray<T> toArray()
+    {
+        MyArray<T> array = new MyArray<>();
+        Node<T> current = head;
+        while (current != null)
+        {
+            array.add(current.data);
+            current = current.next;
+        }
+        return array;
+    }
+
 
 }

@@ -1,5 +1,7 @@
 package Datastructures;
 
+import java.lang.reflect.Array;
+
 public class MyArray<T>
 {
     private T[] array;
@@ -105,6 +107,16 @@ public class MyArray<T>
             }
             array = newArray;
         }
+    }
+
+
+    public T[] toJavaArray() {
+        // Maak een nieuwe array van het juiste type
+        T[] array = (T[]) Array.newInstance(this.get(0).getClass(), this.size());
+        for (int i = 0; i < this.size(); i++) {
+            array[i] = this.get(i);
+        }
+        return array;
     }
 }
 

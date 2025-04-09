@@ -93,7 +93,8 @@ public class ImportDataset
 
             String[] headers = lines.get(0).split(",");
 
-            for (int i = 1; i < lines.size(); i++) {
+            for (int i = 1; i < lines.size(); i++)
+            {
                 String[] values = lines.get(i).split(",");
 
                 // Controleer of de rij evenveel kolommen heeft als de header

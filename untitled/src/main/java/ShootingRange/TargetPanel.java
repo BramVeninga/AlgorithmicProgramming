@@ -18,7 +18,7 @@ public class TargetPanel extends JPanel
     {
         try
         {
-            targetImage = ImageIO.read(new File("src/main/java/rescources/10_m_Air_Rifle_target.svg.png")); // Zorg dat de afbeelding hier staat!
+            targetImage = ImageIO.read(new File("src/main/resources/10_m_Air_Rifle_target.svg.png")); // Zorg dat de afbeelding hier staat!
         }
         catch (IOException e)
         {

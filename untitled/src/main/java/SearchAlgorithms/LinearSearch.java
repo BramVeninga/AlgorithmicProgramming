@@ -14,21 +14,4 @@ public class LinearSearch
         }
         return -1; // Element niet gevonden
     }
-
-    public static void main(String[] args)
-    {
-        String[] schutters = {"Hendrik", "Karel", "Jan"};
-        String target = "Karel";
-
-        int result = linearSearch(schutters, target);
-
-        if (result != -1)
-        {
-            System.out.println("Element gevonden op index: " + result);
-        }
-        else
-        {
-            System.out.println("Element niet gevonden.");
-        }
-    }
 }

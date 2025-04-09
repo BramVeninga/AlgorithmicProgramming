@@ -4,8 +4,8 @@ import Datastructures.SinglyLinkedList;
 
 public class Shooter
 {
-    public int schutter_ID;
-    public SinglyLinkedList<Schot> schoten;
+    private int schutter_ID;
+    private SinglyLinkedList<Schot> schoten;
 
     public Shooter(int schutter_ID, SinglyLinkedList<Schot> schoten)
     {
