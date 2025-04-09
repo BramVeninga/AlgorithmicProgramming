@@ -1,76 +1,65 @@
 package Analyse;
 
+import Datastructures.MyArray;
 import Datastructures.SinglyLinkedList;
 import ShootingRange.Shot;
 import ShootingRange.StartScherm;
 import Shooter.Shooter;
 import Shooter.Schot;
+import SortingAlgorithms.BubbleSort;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class ShooterDetailScreen extends JFrame
 {
     private JTable detailTable;
     private DefaultTableModel tableModel;
     private JComboBox<String> sortOptions;
-    private JComboBox<String> algorithmOptions;
     private JButton backButton;
 
     private SinglyLinkedList<Schot> shooterShots;
 
     public ShooterDetailScreen(Shooter shooter)
     {
-        setTitle(" Shooter.Shooter Details - " + shooter.getSchutter_ID());
+        setTitle("Shooter Details - " + shooter.getSchutter_ID());
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // Dummy data for one shooter – replace with actual parsed data
         shooterShots = shooter.getSchoten();
 
-        // Table
-        String[] columns = {"Schotnummer", "Schotresultaat", "Vergelijking vorige schot", "Huidige seriegemiddelde", "totale score"};
+        // Tabel
+        String[] columns = {"Schotnummer", "Schotresultaat", "Vergelijking vorige schot", "Huidige seriegemiddelde", "Totale score"};
         tableModel = new DefaultTableModel(columns, 0);
         detailTable = new JTable(tableModel);
         populateTable(shooterShots);
 
         add(new JScrollPane(detailTable), BorderLayout.CENTER);
 
-        // Control Panel
+        // Bediening
         JPanel controlPanel = new JPanel(new FlowLayout());
 
         sortOptions = new JComboBox<>(new String[]{
+                "Sorteer op schotnummer",
                 "Sorteer op schotresultaat",
                 "Sorteer op huidige seriegemiddelde",
                 "Sorteer op totale score"
         });
 
-        algorithmOptions = new JComboBox<>(new String[]{
-                "SortingAlgorithms.BubbleSort",
-                "SortingAlgorithms.QuickSort"
-        });
-
         sortOptions.addActionListener(e -> sortTable());
-        algorithmOptions.addActionListener(e -> sortTable());
 
-        backButton = new JButton("Back");
+        backButton = new JButton("Terug");
         backButton.addActionListener(e -> {
-            // Go back to previous screen or main menu
             new StartScherm().setVisible(true);
             dispose();
         });
 
-        controlPanel.add(new JLabel("Sort:"));
+        controlPanel.add(new JLabel("Sorteer op:"));
         controlPanel.add(sortOptions);
-        controlPanel.add(new JLabel("Algorithm:"));
-        controlPanel.add(algorithmOptions);
         controlPanel.add(backButton);
 
         add(controlPanel, BorderLayout.SOUTH);
@@ -84,42 +73,47 @@ public class ShooterDetailScreen extends JFrame
         for (int i = 0; i < shots.size(); i++)
         {
             Schot shot = shots.get(i);
-            tableModel.addRow(new Object[]{shot.getSchotnummer(), shot.getSchotresultaat(), shot.getVergelijking_vorig_schot(), shot.getHuidige_seriegemiddelde(), shot.getTotale_score()});
+            tableModel.addRow(new Object[]{
+                    shot.getSchotnummer(),
+                    shot.getSchotresultaat(),
+                    shot.getVergelijking_vorig_schot(),
+                    shot.getHuidige_seriegemiddelde(),
+                    shot.getTotale_score()
+            });
         }
     }
 
     private void sortTable()
     {
         String selectedSort = (String) sortOptions.getSelectedItem();
-        String selectedAlgorithm = (String) algorithmOptions.getSelectedItem();
 
-        if (selectedSort != null && selectedAlgorithm != null) {
-            // Define a comparator based on selected sort option
-            Comparator<Schot> comparator = switch (selectedSort) {
-                case "Sorteer op schotresultaat" -> Comparator.comparingDouble(Schot::getSchotresultaat).reversed();
-                case "Sorteer op huidige seriegemiddelde" -> Comparator.comparingDouble(Schot::getHuidige_seriegemiddelde).reversed();
-                case "Sorteer op totale score" -> Comparator.comparingDouble(Schot::getTotale_score).reversed();
-                default -> null;
-            };
+        Comparator<Schot> comparator = switch (selectedSort)
+        {
+            case "Sorteer op schotresultaat" ->
+                    Comparator.comparingDouble(Schot::getSchotresultaat).reversed();
+            case "Sorteer op huidige seriegemiddelde" ->
+                    Comparator.comparingDouble(Schot::getHuidige_seriegemiddelde).reversed();
+            case "Sorteer op totale score" ->
+                    Comparator.comparingDouble(Schot::getTotale_score).reversed();
+            default ->
+                    Comparator.comparingInt(Schot::getSchotnummer); // standaard schotnummer
+        };
 
-            if (comparator != null) {
-                // Convert List to array
-                Schot[] shotArray = shooterShots.toArray(new Schot[0]);
+        // Zet linked list om naar array
+        MyArray<Schot> myArray = shooterShots.toArray();
+        Schot[] array = myArray.toJavaArray();
 
-                // Sort with selected algorithm
-                if ("SortingAlgorithms.BubbleSort".equals(selectedAlgorithm)) {
-                    shotArray = SortingAlgorithms.BubbleSort.sort(shotArray);
-                } else if ("SortingAlgorithms.QuickSort".equals(selectedAlgorithm)) {
-//                    shotArray = SortingAlgorithms.MergeSort.sort(shotArray);
-                }
+        // Sorteer met BubbleSort
+        BubbleSort.sort(array, comparator);
 
-                // Sort with comparator
-                Arrays.sort(shotArray, comparator);
-
-                // Convert back to List
-                shooterShots = new ArrayList<>(Arrays.asList(shotArray));
-                populateTable(shooterShots);
-            }
+        // Zet terug naar SinglyLinkedList
+        SinglyLinkedList<Schot> sortedList = new SinglyLinkedList<>();
+        for (Schot s : array)
+        {
+            sortedList.add(s);
         }
+
+        shooterShots = sortedList;
+        populateTable(shooterShots);
     }
 }

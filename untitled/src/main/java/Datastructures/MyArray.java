@@ -106,5 +106,13 @@ public class MyArray<T>
             array = newArray;
         }
     }
+
+    public T[] toJavaArray() {
+        T[] array = (T[]) new Object[this.size()];
+        for (int i = 0; i < this.size(); i++) {
+            array[i] = this.get(i);
+        }
+        return array;
+    }
 }
 

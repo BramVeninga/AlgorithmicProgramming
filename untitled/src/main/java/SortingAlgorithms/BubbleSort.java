@@ -1,26 +1,34 @@
 package SortingAlgorithms;
 
+import Datastructures.MyArray;
+
 import java.util.Arrays;
+import java.util.Comparator;
+
+import java.util.Comparator;
 
 public class BubbleSort
 {
-   public static <T extends Comparable<T>> T[] sort(T[] array)
-   {
-       int n = array.length;
-       T[] sortedArray = Arrays.copyOf(array, n);
-       for (int i = 0; i < n - 1; i++)
-       {
-           for (int j = 0; j < n - i - 1; j++)
-           {
-               if (sortedArray[j].compareTo(sortedArray[j + 1]) > 0)
-               {
-                   T temp = sortedArray[j];
-                   sortedArray[j] = sortedArray[j+ 1];
-                   sortedArray[j+ 1] = temp;
-               }
-           }
-       }
-
-       return sortedArray;
-   }
+    public static <T> void sort(T[] array, Comparator<? super T> comparator)
+    {
+        boolean swapped;
+        int n = array.length;
+        do
+        {
+            swapped = false;
+            for (int i = 1; i < n; i++)
+            {
+                if (comparator.compare(array[i - 1], array[i]) > 0)
+                {
+                    T temp = array[i - 1];
+                    array[i - 1] = array[i];
+                    array[i] = temp;
+                    swapped = true;
+                }
+            }
+            n--;
+        }
+        while (swapped);
+    }
 }
+

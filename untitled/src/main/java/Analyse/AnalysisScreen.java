@@ -105,7 +105,8 @@ public class AnalysisScreen extends JFrame
           String shooterId = searchField.getText().trim();
           isShooterIdValid = false;
 
-          if (shooterId.isEmpty()) {
+          if (shooterId.isEmpty())
+          {
               JOptionPane.showMessageDialog(this, "Please enter a Shooter ID.");
 
               return;
@@ -125,17 +126,21 @@ public class AnalysisScreen extends JFrame
               }
           }
 
-          if (found) {
+          if (found)
+          {
               isShooterIdValid = true;
               JOptionPane.showMessageDialog(this, "Shooter ID is valid!");
-          } else {
+          }
+          else
+          {
               JOptionPane.showMessageDialog(this, "Shooter ID not found.");
           }
     }
 
     private void analyzeShooter(ActionEvent e)
     {
-        if (!isShooterIdValid) {
+        if (!isShooterIdValid)
+        {
             JOptionPane.showMessageDialog(this, "Please validate the Shooter ID first.");
             return;
         }
