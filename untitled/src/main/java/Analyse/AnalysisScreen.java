@@ -111,7 +111,12 @@ public class AnalysisScreen extends JFrame {
 
           for (int i = 0; i < shooterDataList.size(); i++)
           {
+              String compareTo = String.valueOf(shooterDataList.get(i).schutter_ID);
 
+              if (compareTo.equals(shooterId))
+              {
+                  found = true;
+              }
           }
 
           if (found) {
