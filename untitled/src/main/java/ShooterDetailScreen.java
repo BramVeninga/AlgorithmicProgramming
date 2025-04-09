@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class ShooterDetailScreen extends JFrame {
+public class ShooterDetailScreen extends JFrame
+{
     private JTable detailTable;
     private DefaultTableModel tableModel;
     private JComboBox<String> sortOptions;
@@ -15,7 +16,8 @@ public class ShooterDetailScreen extends JFrame {
 
     private List<ShooterShot> shooterShots;
 
-    public ShooterDetailScreen(String shooterId) {
+    public ShooterDetailScreen(String shooterId)
+    {
         setTitle(" Shooter.Shooter Details - " + shooterId);
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
