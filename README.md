@@ -13,6 +13,8 @@ The startScherm should now launch itself and appear in your view. A choice follo
 
 Note here that if a file is chosen then the data can be analyzed. The data from the shooting screen will not be analyzed. 
 
+To test you can use the json file in the repository.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
