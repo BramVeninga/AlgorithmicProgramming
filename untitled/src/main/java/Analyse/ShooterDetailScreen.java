@@ -1,4 +1,6 @@
-package ShootingRange;
+package Analyse;
+
+import ShootingRange.StartScherm;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

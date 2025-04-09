@@ -3,11 +3,13 @@ package ShootingRange;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Schietbaan {
+public class Schietbaan
+{
     private List<Shot> schoten = new ArrayList<>();
     private int schotNummer = 1;
 
-    public void voegSchotToe(double score, int x, int y) {
+    public void voegSchotToe(double score, int x, int y)
+    {
         schoten.add(new Shot(schotNummer, score, x, y));
         schotNummer++;
     }
