@@ -11,11 +11,11 @@ import java.io.File;
 import java.util.Comparator;
 
 import Datastructures.MyArrayList;
-import ShootingRange.ShooterDetailScreen;
 import ShootingRange.StartScherm;
 import SortingAlgorithms.MergeSort;
 
-public class AnalysisScreen extends JFrame {
+public class AnalysisScreen extends JFrame
+{
     private JTable shooterTable;
     private DefaultTableModel tableModel;
     private JTextField searchField;
@@ -26,7 +26,8 @@ public class AnalysisScreen extends JFrame {
     private MyArrayList<Shooter> shooterDataList;
     private JsonLoader jsonLoader;
 
-    public AnalysisScreen(File file) {
+    public AnalysisScreen(File file)
+    {
         setTitle("Shooter Analysis - " + file.getName());
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,7 +90,8 @@ public class AnalysisScreen extends JFrame {
         setVisible(true);
     }
 
-    private void populateTable(MyArrayList<Shooter> dataList) {
+    private void populateTable(MyArrayList<Shooter> dataList)
+    {
         tableModel.setRowCount(0);
         for (int i = 0; i < dataList.size(); i++)
         {
@@ -97,7 +99,8 @@ public class AnalysisScreen extends JFrame {
         }
     }
 
-    private void checkShooterId(ActionEvent e) {
+    private void checkShooterId(ActionEvent e)
+    {
           String shooterId = searchField.getText().trim();
           isShooterIdValid = false;
 
@@ -127,7 +130,8 @@ public class AnalysisScreen extends JFrame {
           }
     }
 
-    private void analyzeShooter(ActionEvent e) {
+    private void analyzeShooter(ActionEvent e)
+    {
         if (!isShooterIdValid) {
             JOptionPane.showMessageDialog(this, "Please validate the Shooter ID first.");
             return;
@@ -139,20 +143,24 @@ public class AnalysisScreen extends JFrame {
     }
 
     // Sample data class
-    static class ShooterData {
+    static class ShooterData
+    {
         private final String shooterId;
         private final int totalShots;
 
-        public ShooterData(String shooterId, int totalShots) {
+        public ShooterData(String shooterId, int totalShots)
+        {
             this.shooterId = shooterId;
             this.totalShots = totalShots;
         }
 
-        public String getShooterId() {
+        public String getShooterId()
+        {
             return shooterId;
         }
 
-        public int getTotalShots() {
+        public int getTotalShots()
+        {
             return totalShots;
         }
     }
