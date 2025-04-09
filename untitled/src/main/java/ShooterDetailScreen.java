@@ -102,7 +102,7 @@ public class ShooterDetailScreen extends JFrame {
                 if ("SortingAlgorithms.BubbleSort".equals(selectedAlgorithm)) {
                     shotArray = SortingAlgorithms.BubbleSort.sort(shotArray);
                 } else if ("SortingAlgorithms.QuickSort".equals(selectedAlgorithm)) {
-                    shotArray = SortingAlgorithms.QuickSort.sort(shotArray);
+//                    shotArray = SortingAlgorithms.MergeSort.sort(shotArray);
                 }
 
                 // Sort with comparator
