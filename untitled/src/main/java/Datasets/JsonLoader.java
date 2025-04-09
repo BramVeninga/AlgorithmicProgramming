@@ -57,7 +57,8 @@ public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
                 array.add(shooter);
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

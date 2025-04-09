@@ -138,4 +138,18 @@ public class SinglyLinkedList<T>
         return size == 0;
     }
 
+    // Converteert de linked list naar een MyArray
+    public MyArray<T> toArray()
+    {
+        MyArray<T> array = new MyArray<>();
+        Node<T> current = head;
+        while (current != null)
+        {
+            array.add(current.data);
+            current = current.next;
+        }
+        return array;
+    }
+
+
 }
