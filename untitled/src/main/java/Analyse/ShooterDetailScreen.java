@@ -1,6 +1,7 @@
 package Analyse;
 
 import Datastructures.SinglyLinkedList;
+import ShootingRange.Shot;
 import ShootingRange.StartScherm;
 import Shooter.Shooter;
 import Shooter.Schot;
@@ -35,7 +36,7 @@ public class ShooterDetailScreen extends JFrame
         shooterShots = shooter.getSchoten();
 
         // Table
-        String[] columns = {"Schotresultaat", "Vergelijking vorige schot", "Huidige seriegemiddelde", "totale score"};
+        String[] columns = {"Schotnummer", "Schotresultaat", "Vergelijking vorige schot", "Huidige seriegemiddelde", "totale score"};
         tableModel = new DefaultTableModel(columns, 0);
         detailTable = new JTable(tableModel);
         populateTable(shooterShots);
@@ -83,42 +84,42 @@ public class ShooterDetailScreen extends JFrame
         for (int i = 0; i < shots.size(); i++)
         {
             Schot shot = shots.get(i);
-            tableModel.addRow(new Object[]{shot.getSchotresultaat(), shot.getVergelijking_vorig_schot(), shot.getHuidige_seriegemiddelde(), shot.getTotale_score()});
+            tableModel.addRow(new Object[]{shot.getSchotnummer(), shot.getSchotresultaat(), shot.getVergelijking_vorig_schot(), shot.getHuidige_seriegemiddelde(), shot.getTotale_score()});
         }
     }
 
     private void sortTable()
     {
-//        String selectedSort = (String) sortOptions.getSelectedItem();
-//        String selectedAlgorithm = (String) algorithmOptions.getSelectedItem();
-//
-//        if (selectedSort != null && selectedAlgorithm != null) {
-//            // Define a comparator based on selected sort option
-//            Comparator<ShooterShot> comparator = switch (selectedSort) {
-//                case "Sorteer op schotresultaat" -> Comparator.comparingDouble(ShooterShot::getShootingResult).reversed();
-//                case "Sorteer op huidige seriegemiddelde" -> Comparator.comparingDouble(ShooterShot::getAverageShot).reversed();
-//                case "Sorteer op totale score" -> Comparator.comparingDouble(ShooterShot::getTotalScore).reversed();
-//                default -> null;
-//            };
-//
-//            if (comparator != null) {
-//                // Convert List to array
-//                ShooterShot[] shotArray = shooterShots.toArray(new ShooterShot[0]);
-//
-//                // Sort with selected algorithm
-//                if ("SortingAlgorithms.BubbleSort".equals(selectedAlgorithm)) {
-//                    shotArray = SortingAlgorithms.BubbleSort.sort(shotArray);
-//                } else if ("SortingAlgorithms.QuickSort".equals(selectedAlgorithm)) {
-////                    shotArray = SortingAlgorithms.MergeSort.sort(shotArray);
-//                }
-//
-//                // Sort with comparator
-//                Arrays.sort(shotArray, comparator);
-//
-//                // Convert back to List
-//                shooterShots = new ArrayList<>(Arrays.asList(shotArray));
-//                populateTable(shooterShots);
-//            }
-//        }
+        String selectedSort = (String) sortOptions.getSelectedItem();
+        String selectedAlgorithm = (String) algorithmOptions.getSelectedItem();
+
+        if (selectedSort != null && selectedAlgorithm != null) {
+            // Define a comparator based on selected sort option
+            Comparator<Schot> comparator = switch (selectedSort) {
+                case "Sorteer op schotresultaat" -> Comparator.comparingDouble(Schot::getSchotresultaat).reversed();
+                case "Sorteer op huidige seriegemiddelde" -> Comparator.comparingDouble(Schot::getHuidige_seriegemiddelde).reversed();
+                case "Sorteer op totale score" -> Comparator.comparingDouble(Schot::getTotale_score).reversed();
+                default -> null;
+            };
+
+            if (comparator != null) {
+                // Convert List to array
+                Schot[] shotArray = shooterShots.toArray(new Schot[0]);
+
+                // Sort with selected algorithm
+                if ("SortingAlgorithms.BubbleSort".equals(selectedAlgorithm)) {
+                    shotArray = SortingAlgorithms.BubbleSort.sort(shotArray);
+                } else if ("SortingAlgorithms.QuickSort".equals(selectedAlgorithm)) {
+//                    shotArray = SortingAlgorithms.MergeSort.sort(shotArray);
+                }
+
+                // Sort with comparator
+                Arrays.sort(shotArray, comparator);
+
+                // Convert back to List
+                shooterShots = new ArrayList<>(Arrays.asList(shotArray));
+                populateTable(shooterShots);
+            }
+        }
     }
 }
