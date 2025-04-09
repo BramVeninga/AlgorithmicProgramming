@@ -1,3 +1,5 @@
+package ShootingRange;
+
 public class Shot
 {
     private int nummer;

@@ -1,3 +1,5 @@
+package ShootingRange;
+
 import Datasets.JsonLoader;
 import Shooter.Shooter;
 

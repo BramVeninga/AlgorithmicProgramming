@@ -1,3 +1,5 @@
+package ShootingRange;
+
 import java.util.ArrayList;
 import java.util.List;
 
