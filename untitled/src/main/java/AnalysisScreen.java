@@ -6,8 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.Comparator;
 
 import Datastructures.MyArrayList;
+import SortingAlgorithms.MergeSort;
 
 public class AnalysisScreen extends JFrame {
     private JTable shooterTable;
@@ -21,7 +23,7 @@ public class AnalysisScreen extends JFrame {
     private JsonLoader jsonLoader;
 
     public AnalysisScreen(File file) {
-        setTitle("📊 Shooter Analysis - " + file.getName());
+        setTitle("Shooter Analysis - " + file.getName());
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -30,14 +32,6 @@ public class AnalysisScreen extends JFrame {
         jsonLoader = new JsonLoader();
 
         shooterDataList = jsonLoader.loadData(file.getPath());
-
-        // Sample data - replace with actual parsed file data
-        //        shooterDataList = new ArrayList<>(List.of(
-        //                new ShooterData("A123", 25),
-        //                new ShooterData("B456", 40),
-        //                new ShooterData("C789", 15),
-        //                new ShooterData("D111", 30)
-        //        ));
 
         // Table Setup
         String[] columns = {"Shooter ID", "Total Shots Fired"};
@@ -54,13 +48,13 @@ public class AnalysisScreen extends JFrame {
         JButton sortByShooterButton = new JButton("Sort by Shooter ID");
         JButton sortByShotsButton = new JButton("Sort by Shots Fired");
         searchField = new JTextField(10);
-        checkShooterButton = new JButton("✅ Check Shooter ID");
-        analyzeShooterButton = new JButton("📊 Analyze Shooter");
-        JButton backButton = new JButton("🔙 Back");
+        checkShooterButton = new JButton("Check Shooter ID");
+        analyzeShooterButton = new JButton("Analyze Shooter");
+        JButton backButton = new JButton("Back");
 
         sortByShooterButton.addActionListener(e -> {
-            //            shooterDataList.sort(Comparator.comparing(ShooterData::getShooterId));
-            //            populateTable(shooterDataList);
+            MyArrayList<Shooter> sortedById = MergeSort.mergeSort(shooterDataList, Comparator.comparingInt(s -> s.schutter_ID));
+            populateTable(sortedById);
         });
 
         sortByShotsButton.addActionListener(e -> {
@@ -104,7 +98,7 @@ public class AnalysisScreen extends JFrame {
         //        isShooterIdValid = false;
         //
         //        if (shooterId.isEmpty()) {
-        //            JOptionPane.showMessageDialog(this, "❌ Please enter a Shooter ID.");
+        //            JOptionPane.showMessageDialog(this, "Please enter a Shooter ID.");
         //            return;
         //        }
         //
@@ -113,15 +107,15 @@ public class AnalysisScreen extends JFrame {
         //
         //        if (found) {
         //            isShooterIdValid = true;
-        //            JOptionPane.showMessageDialog(this, "✅ Shooter ID is valid!");
+        //            JOptionPane.showMessageDialog(this, "Shooter ID is valid!");
         //        } else {
-        //            JOptionPane.showMessageDialog(this, "❌ Shooter ID not found.");
+        //            JOptionPane.showMessageDialog(this, "Shooter ID not found.");
         //        }
     }
 
     private void analyzeShooter(ActionEvent e) {
         if (!isShooterIdValid) {
-            JOptionPane.showMessageDialog(this, "⚠️ Please validate the Shooter ID first.");
+            JOptionPane.showMessageDialog(this, "Please validate the Shooter ID first.");
             return;
         }
 

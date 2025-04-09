@@ -63,6 +63,6 @@ public class JsonLoader implements DataLoader<MyArrayList<Shooter>>
         }
 
         // Sorteer de array voor je hem teruggeeft
-        return MergeSort.mergeSort(array, Comparator.comparingInt(s -> s.schutter_ID));
+        return array;
     }
 }
