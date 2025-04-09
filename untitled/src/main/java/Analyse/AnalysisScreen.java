@@ -1,4 +1,4 @@
-package ShootingRange;
+package Analyse;
 
 import Datasets.JsonLoader;
 import Shooter.Shooter;
@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.Comparator;
 
 import Datastructures.MyArrayList;
+import ShootingRange.ShooterDetailScreen;
+import ShootingRange.StartScherm;
 import SortingAlgorithms.MergeSort;
 
 public class AnalysisScreen extends JFrame {
@@ -60,8 +62,8 @@ public class AnalysisScreen extends JFrame {
         });
 
         sortByShotsButton.addActionListener(e -> {
-            //            shooterDataList.sort(Comparator.comparingInt(ShooterData::getTotalShots).reversed());
-            //            populateTable(shooterDataList);
+            MyArrayList<Shooter> sortedById = MergeSort.mergeSort(shooterDataList, Comparator.comparingInt(s -> s.getTotalShots()));
+            populateTable(sortedById);
         });
 
         checkShooterButton.addActionListener(this::checkShooterId);
@@ -96,23 +98,28 @@ public class AnalysisScreen extends JFrame {
     }
 
     private void checkShooterId(ActionEvent e) {
-        //        String shooterId = searchField.getText().trim();
-        //        isShooterIdValid = false;
-        //
-        //        if (shooterId.isEmpty()) {
-        //            JOptionPane.showMessageDialog(this, "Please enter a Shooter ID.");
-        //            return;
-        //        }
-        //
-        //        boolean found = shooterDataList.stream()
-        //                .anyMatch(data -> data.getShooterId().equalsIgnoreCase(shooterId));
-        //
-        //        if (found) {
-        //            isShooterIdValid = true;
-        //            JOptionPane.showMessageDialog(this, "Shooter ID is valid!");
-        //        } else {
-        //            JOptionPane.showMessageDialog(this, "Shooter ID not found.");
-        //        }
+          String shooterId = searchField.getText().trim();
+          isShooterIdValid = false;
+
+          if (shooterId.isEmpty()) {
+              JOptionPane.showMessageDialog(this, "Please enter a Shooter ID.");
+
+              return;
+          }
+
+          boolean found = false;
+
+          for (int i = 0; i < shooterDataList.size(); i++)
+          {
+
+          }
+
+          if (found) {
+              isShooterIdValid = true;
+              JOptionPane.showMessageDialog(this, "Shooter ID is valid!");
+          } else {
+              JOptionPane.showMessageDialog(this, "Shooter ID not found.");
+          }
     }
 
     private void analyzeShooter(ActionEvent e) {
